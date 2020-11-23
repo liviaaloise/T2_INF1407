@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="../../static/MeuSite/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"> -->
+    {% block head %}{% endblock %}
+  </head>
+  <body class="mx-4">
+
+
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <a href="{% url 'sec-home' %}">Home</a> |
+        {% if user.is_authenticated %}
+        <a href="{% url 'sec-paginaSecreta' %}"> Pagina Secreta</a> |
+        <a href="{% url 'sec-logout' %}">Logout</a> |
+        <a href="{% url 'sec-passwordChange' %}">Troca Senha</a> |
+        <a href="{% url 'sec-updateProfile' pk=user.id %}">Update Perfil</a> |
+        {% else %}
+        <a href="{% url 'sec-registro' %}">Registro</a> |
+        <a href="{% url 'sec-login' %}">Login</a> |
+        {% endif %}
+        <!-- first of retorna o primeiro valor nao nulo entre os 3 -->
+        Voce é {% firstof user.first_name user.username "visitante" %}
+      </div>
+
+    </nav>
+
+    <!-- <div class="">
+      <a href="{% url 'sec-home' %}">Home</a> |
+      {% if user.is_authenticated %}
+      <a href="{% url 'sec-paginaSecreta' %}"> Pagina Secreta</a> |
+      <a href="{% url 'sec-logout' %}">Logout</a> |
+      <a href="{% url 'sec-passwordChange' %}">Troca Senha</a> |
+      <a href="{% url 'sec-updateProfile' pk=user.id %}">Update Perfil</a> |
+      {% else %}
+      <a href="{% url 'sec-registro' %}">Registro</a> |
+      <a href="{% url 'sec-login' %}">Login</a> |
+      {% endif %}
+      first of retorna o primeiro valor nao nulo entre os 3
+      Voce é {% firstof user.first_name user.username "visitante" %}
+    </div> -->
+
+    <div class="mt-4">
+      {% block content %} {% endblock %}
+    </div>
+  </body>
+</html>
