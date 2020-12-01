@@ -24,9 +24,13 @@ class TodoCreateView(View):
         formulario = TarefaForm(data=request.POST,initial={'autor': request.user.username})
         #formulario = dados do POST
         if formulario.is_valid():
-
+            #contato somente em memoria
+            print('\n\nola')
+            print('\n\nformulario', formulario)
+            print('user', formulario.user)
             todo = formulario.save()
             todo.autor = request.user
+            print('todo', todo)
             #salvar no banco
             todo.save()
             #redirecionar para outro view

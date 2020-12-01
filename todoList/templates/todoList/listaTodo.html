@@ -6,6 +6,7 @@
 <table class="table table-hover" border="3">
   <thead>
     <tr class="table-primary">
+      <th scope="col">Autor</th>
       <th scope="col">Data</th>
       <th scope='col'>Tarefa</th>
       <th scope='col'>Ações</th>
@@ -16,6 +17,7 @@
   {% for todo in todos %}
   <tbody>
     <tr class="table-light">
+      <td>{{todo.autor}}</td>
       <td>{{todo.prazo}}</td>
       <td>{{todo.texto}}</td>
 
