@@ -26,6 +26,7 @@ from django.contrib.auth.models import User
 urlpatterns = [
 
     path('admin/', admin.site.urls),
+    path('todo/', include('todoList.urls')),
     path('accounts/', views.homeSec, name="sec-home"),
     path('accounts/registro', views.registro, name="sec-registro"),
     path('accounts/login/', LoginView.as_view(template_name="registro/login.html"), name="sec-login"),
@@ -33,6 +34,7 @@ urlpatterns = [
     path('accounts/profile/', views.paginaSecreta, name="sec-paginaSecreta"),
     path('accounts/passwordChange/', PasswordChangeView.as_view(template_name="registro/passwordChangeForm.html",
     success_url=reverse_lazy('sec-passwordChangeDone')), name="sec-passwordChange"),
+
     path('accounts/passwordChangeDone/', PasswordChangeDoneView.as_view(template_name="registro/passwordChangeDone.html"),
      name="sec-passwordChangeDone"),
 

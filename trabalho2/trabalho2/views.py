@@ -13,9 +13,7 @@ GET -> cria o formulario para criar usuario
 POST -> pega os dados do formulario e cria um usuario
 '''
 def registro(request):
-    print('registro', request.method)
     if request.method == 'POST':
-        print('POST')
         #cria usuario
         formulario = UserCreationForm(request.POST)
         if formulario.is_valid():
