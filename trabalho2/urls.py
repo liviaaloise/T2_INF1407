@@ -47,9 +47,9 @@ urlpatterns = [
      path('account/passwordReset', PasswordResetView.as_view(
          template_name="registro/passwordReset.html",
          success_url=reverse_lazy("sec-passwordResetDone"),
-         from_email="webmaster_do_site@example.com.br",
+         from_email="livialra.teste@gmail.com",
          subject_template_name="registro/passwordResetSubject.txt",
-         email_template_name="registro/passwordResetEmail.html"
+         html_email_template_name="registro/passwordResetEmail.html"
      ),
      name="sec-passwordReset"),
 
@@ -61,11 +61,12 @@ urlpatterns = [
             template_name="registro/passwordResetConfirm.html",
             success_url=reverse_lazy("sec-passwordResetComplete")
         ),
-         name="sec-passwordResetConfirm"),
+         name="password_reset_confirm"),
 
      path('accounts/passwordResetComplete/', PasswordResetCompleteView.as_view(
         template_name='registro/passwordResetComplete.html'
      ), name='sec-passwordResetComplete'),
+
 
      path('accounts/verificaUsername', views.verificaUsername, name="sec-verificaUsername"),
 

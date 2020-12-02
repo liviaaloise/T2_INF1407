@@ -9,4 +9,5 @@ urlpatterns = [
     path("cria/", views.TodoCreateView.as_view(), name="cria-todo"),
     path("atualiza/<int:pk>", views.TodoUpdateView.as_view(), name="atualiza-todo"),
     path("apaga/<int:pk>", views.TodoDeleteView.as_view(), name="apaga-todo"),
+    path('minhasTarefas/', views.AuthorListView.as_view(), name="todo-minhasTarefas"),
 ]

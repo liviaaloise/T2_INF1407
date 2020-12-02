@@ -6,12 +6,19 @@ from django.http.response import HttpResponseRedirect
 from django.urls.base import reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
+from django.db.models import Q
 # Create your views here.
 
 class TodoListView(View):
     def get(self,request,*args, **kwargs):
-        todos = Tarefa.objects.all()
+        todos = Tarefa.objects.filter(Q(autor=request.user)| Q(privada=False))
         context = {'todos': todos, }
+        return render(request, 'todoList/listaTodo.html', context)
+
+class AuthorListView(View):
+    def get(self,request,*args, **kwargs):
+        todosAutor = Tarefa.objects.filter(autor=request.user)
+        context = {'todos': todosAutor, }
         return render(request, 'todoList/listaTodo.html', context)
 
 class TodoCreateView(View):

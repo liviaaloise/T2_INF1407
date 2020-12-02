@@ -7,3 +7,4 @@ class Tarefa(models.Model):
     autor = models.ForeignKey(User,null=True, on_delete=models.SET_NULL)
     texto = models.CharField(max_length=200)
     prazo = models.DateField(help_text="digite a data da entrega")
+    privada = models.BooleanField(default=False)
