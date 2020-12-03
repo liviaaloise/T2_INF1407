@@ -3,7 +3,7 @@
 {% block title %} Lista de Contatos {%endblock %}
 
 {% block head %}
-<script type="text/javascript" src="{% static 'todoList/js/todo.js' %}"></script>
+<!-- <script type="text/javascript" src="{% static 'todoList/js/todo.js' %}"></script> -->
 {% endblock %}
 
 {% block content %}
@@ -15,15 +15,9 @@
       <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
     </svg>
   </a>
-  <span class="ml-5"> Minhas Tarefas:
-
-    <a href="{% url 'todoList:todo-minhasTarefas' %}"> blblbl </a>
-    <!-- <input type="checkbox" id="minhasTarefas"></button> -->
-  </span>
-
 </div>
 
-<table class="table table-hover" border="3">
+<table id="tabela" class="table table-hover" border="3">
   <thead>
     <tr class="table-primary">
       <th scope="col">Autor</th>
@@ -38,7 +32,7 @@
   {% for todo in todos %}
   <tbody>
     <tr class="table-light">
-      <td>{{todo.autor}}</td>
+      <td>{{todo.autor}} </td>
       <td>{{todo.prazo}}</td>
       <td>{{todo.texto}}</td>
       {% if todo.privada %}
@@ -48,6 +42,7 @@
       {% endif %}
 
 
+      {% if minhasTarefas %}
       <td>
         <a href="{% url 'todoList:atualiza-todo' pk=todo.id %}" class="btn btn-primary">
           <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -60,14 +55,18 @@
             <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
           </svg>
         </a>
+      </td>
+      {% else %}
 
-      </d>
+      <td>Nenhuma ação disponível</td>
+      {% endif %}
+
     </tr>
   </tbody>
   {% empty %}
   <tbody>
     <tr class="tablwe-secondary">
-      <th colspan="3">
+      <th colspan="5">
         Ainda nao tem tarefas cadastrados
       </th>
     </tr>

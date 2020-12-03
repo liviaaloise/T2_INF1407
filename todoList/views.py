@@ -7,21 +7,36 @@ from django.urls.base import reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+from django.forms.models import model_to_dict
+from django.http import JsonResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 # Create your views here.
 
 class TodoListView(View):
     def get(self,request,*args, **kwargs):
-        todos = Tarefa.objects.filter(Q(autor=request.user)| Q(privada=False))
-        context = {'todos': todos, }
+        todos = Tarefa.objects.filter(privada=False)
+        context = {'todos': todos, 'minhasTarefas': False }
         return render(request, 'todoList/listaTodo.html', context)
 
-class AuthorListView(View):
+@login_required()
+def minhasTarefas(request):
+
+    todosAutor = Tarefa.objects.filter(autor=request.user).values()
+    todosAutor = list(todosAutor)
+    data = {
+        'data': todosAutor,
+    }
+    return JsonResponse(data,)
+
+class AuthorListView(LoginRequiredMixin,View):
     def get(self,request,*args, **kwargs):
         todosAutor = Tarefa.objects.filter(autor=request.user)
-        context = {'todos': todosAutor, }
+        context = {'todos': todosAutor, 'minhasTarefas': True  }
         return render(request, 'todoList/listaTodo.html', context)
 
-class TodoCreateView(View):
+class TodoCreateView(LoginRequiredMixin, View):
     def get(self,request,*args, **kwargs):
         context = {'formulario': TarefaForm, }
         return render(request, 'todoList/criaTodo.html', context)

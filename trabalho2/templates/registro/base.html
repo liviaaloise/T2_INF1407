@@ -28,22 +28,25 @@
           {% if user.is_authenticated %}
 
           <li class="nav-item mr-2">
-            <a href="{% url 'sec-logout' %}">Logout</a>
+            <a href="{% url 'todoList:cria-todo' %}">Cria Tarefas</a>
           </li>
           <li class="nav-item mr-2">
-            <a href="{% url 'sec-passwordChange' %}">Troca Senha</a>
+            <a href="{% url 'todoList:lista-todo' %}">Lista Tarefas</a>
           </li>
           <li class="nav-item mr-2">
-            <a href="{% url 'sec-updateProfile' pk=user.id %}">Update Perfil</a>
+            <a href="{% url 'todoList:todo-minhaLista' %}">Minhas Tarefas</a>
           </li>
           <li class="nav-item dropdown mr-2">
             <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-              Tarefas
+              Perfil
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{% url 'todoList:lista-todo' %}">Lista Tarefas</a>
-              <a class="dropdown-item" href="{% url 'todoList:cria-todo' %}">Cria Tarefas</a>
+              <a class="dropdown-item" href="{% url 'sec-updateProfile' pk=user.id %}">Update Perfil</a>
+              <a class="dropdown-item" href="{% url 'sec-passwordChange' %}">Troca Senha</a>
             </div>
+          </li>
+          <li class="nav-item mr-2">
+            <a href="{% url 'sec-logout' %}">Logout</a>
           </li>
           {% else %}
           <li class="nav-item mr-2">
@@ -58,20 +61,6 @@
         Voce é {% firstof user.first_name user.username "visitante" %}
       </div>
     </nav>
-
-    <!-- <div class="">
-      <a href="{% url 'sec-home' %}">Home</a> |
-      {% if user.is_authenticated %}
-      <a href="{% url 'sec-paginaSecreta' %}"> Pagina Secreta</a> |
-      <a href="{% url 'sec-logout' %}">Logout</a> |
-      <a href="{% url 'sec-passwordChange' %}">Troca Senha</a> |
-      <a href="{% url 'sec-updateProfile' pk=user.id %}">Update Perfil</a> |
-      {% else %}
-      <a href="{% url 'sec-registro' %}">Registro</a> |
-      <a href="{% url 'sec-login' %}">Login</a> |
-      {% endif %}
-      Voce é {% firstof user.first_name user.username "visitante" %}
-    </div> -->
 
     <div class="mt-4">
       {% block content %} {% endblock %}

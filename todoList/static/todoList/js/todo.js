@@ -5,51 +5,83 @@ onload = function(e) {
   // setInterval(pegaMensagens, 5000)
 }
 
+let bla = "blabla";
+
 function filtraMensagens(){
-  console.log('Buscando msg');
-  // var xmlhttp;
-  // xmlhttp = new XMLHttpRequest();
-  // xmlhttp.open('GET', '/chat/pegaMensagens', true);
-  // xmlhttp.onreadystatechange = function(e) {
-  //   if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
-  //     var msgs = JSON.parse(xmlhttp.responseText);
-  //     if(msgs.length ==0 ) return;
-  //
-  //     var tabela = document.getElementById('idTableChat');
+  console.log('filtra')
+  console.log(this.checked);
+
+  let url= '';
+  if(this.checked){
+    url = 'minhasTarefas/';
+  }
+
+  console.log('url', url)
+  var xmlhttp;
+  xmlhttp = new XMLHttpRequest();
+  xmlhttp.open('GET', url , true);
+  xmlhttp.onreadystatechange = function(e) {
+    if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+      var response = JSON.parse(xmlhttp.responseText);
+      console.log(response)
+  //     if(response.data ==0 ) return;
+  // //
+  //     var tabela = document.getElementById('tabela');
   //     var novaTabela = document.createElement('table');
-  //     novaTabela.setAttribute('id', "idTableChat");
-  //     var tr, th, td;
+  //     novaTabela.setAttribute('id', "tabela");
+  //     var tr, th, td, thead, tbody;
+  //     thead = document.createElement('thead');
   //     tr = document.createElement('tr');
+  //     tr.setAttribute('class', 'table-primary');
   //     th = document.createElement('th');
   //
-  //     th.appendChild(document.createTextNode('Nickname'));
+  //     th.appendChild(document.createTextNode('Autor'));
   //     tr.appendChild(th);
   //
   //     th = document.createElement('th');
-  //     th.appendChild(document.createTextNode('texto'));
+  //     th.appendChild(document.createTextNode('Data'));
   //     tr.appendChild(th);
   //
   //     th = document.createElement('th');
-  //     th.appendChild(document.createTextNode('Ip'));
+  //     th.appendChild(document.createTextNode('Tarefa'));
+  //     tr.appendChild(th);
+  //
+  //     th = document.createElement('th');
+  //     th.appendChild(document.createTextNode('Privacidade'));
+  //     tr.appendChild(th);
+  //
+  //     th = document.createElement('th');
+  //     th.appendChild(document.createTextNode('Ações'));
   //     tr.appendChild(th);
   //
   //     novaTabela.appendChild(tr)
   //
-  //     for(var i in msgs){
-  //       var msg = msgs[i];
+  //     for(var i in response.data){
+  //       var todo = response.data[i];
+  //       console.log('todo', todo);
   //       tr = document.createElement('tr');
   //
   //       td = document.createElement('td');
-  //       td.appendChild(document.createTextNode(msg.nickname));
+  //       td.appendChild(document.createTextNode(todo.author_id));
   //       tr.appendChild(td);
   //
   //       td = document.createElement('td');
-  //       td.appendChild(document.createTextNode(msg.texto));
+  //       td.appendChild(document.createTextNode(todo.prazo));
   //       tr.appendChild(td);
   //
   //       td = document.createElement('td');
-  //       td.appendChild(document.createTextNode(msg.ipAddress));
+  //       td.appendChild(document.createTextNode(todo.texto));
   //       tr.appendChild(td);
+  //
+  //       td = document.createElement('td');
+  //       td.appendChild(document.createTextNode(todo.privada));
+  //       tr.appendChild(td);
+  //
+  //       td = document.createElement('td');
+  //       td.appendChild(document.createTextNode(todo.privada));
+  //       tr.appendChild(td);
+  //
+  //
   //
   //       novaTabela.appendChild(tr);
   //     }

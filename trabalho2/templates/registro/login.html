@@ -7,7 +7,6 @@
   <h2>Entre com seus dados para fazer login </h2>
   <form class=""  method="post">
     {% csrf_token %}
-    <!-- casa: formato tabela -->
     {{form.as_p}}
     <input type="submit" value="Login">
   </form>
